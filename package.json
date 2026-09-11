@@ -1,0 +1,17 @@
+{
+  "name": "test-cc",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/tobybatch/test-cc#readme",
+  "bugs": {
+    "url": "https://github.com/tobybatch/test-cc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobybatch/test-cc.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js"
+}
