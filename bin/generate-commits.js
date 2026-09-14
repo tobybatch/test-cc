@@ -32,3 +32,5 @@ setTimeout(() => {
         childProcess.exec(`git commit -am "${message}"`);
     }
 }, 1000);
+
+childProcess.exec(`git log --oneline"`);
