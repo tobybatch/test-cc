@@ -29,7 +29,7 @@ setTimeout(() => {
             message += generateWord() + " ";
         }
         childProcess.exec("git add .");
-        childProcess.exec(`git commit -am "${message}"`);
+        childProcess.exec(`git commit --allow-empty -am "${message}"`);
         console.log(`Generated commit messages ${i}: ${message}`);
     }
 }, 1000);
