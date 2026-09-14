@@ -36,7 +36,7 @@ setTimeout(() => {
                 // done
             }
         });
-        childProcess.exec("git add .");
+        setTimeout(() => childProcess.exec("git add dummy-changes"), 1000);
         childProcess.exec(`git commit -am "${message}"`);
         console.log(`Generated commit messages ${i}: ${message}`);
     }
