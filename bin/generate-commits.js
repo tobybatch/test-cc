@@ -2,7 +2,8 @@ let types = ["feat", "doc", "test", "fix", "style", "refactor"];
 let temperature = 0.4;
 let count = process.argv[2] || 20;
 
-let childProcess = require('child_process');
+const childProcess = require('child_process');
+const fs = require('fs')
 
 console.log(`Generating ${count} commit messages with temperature ${temperature} from types: ${types}`);
 
@@ -28,8 +29,15 @@ setTimeout(() => {
         for (let j = 1; j <= 6; j++) {
             message += generateWord() + " ";
         }
+        fs.appendFile('dummy-changes', message, function (err) {
+            if (err) {
+                // append failed
+            } else {
+                // done
+            }
+        });
         childProcess.exec("git add .");
-        childProcess.exec(`git commit --allow-empty -am "${message}"`);
+        childProcess.exec(`git commit -am "${message}"`);
         console.log(`Generated commit messages ${i}: ${message}`);
     }
 }, 1000);
