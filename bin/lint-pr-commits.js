@@ -21,6 +21,7 @@ if (commits.length === 0) {
 
 for (const sha of commits) {
   const message = execSync(`git log --format=%s -n 1 ${sha}`, { encoding: 'utf8' }).trim();
+  console.log(message);
 
   try {
     execSync(`npx commitlint --config commitlint.config.js --edit`, {
