@@ -2,6 +2,8 @@ let types = ["feat", "doc", "test", "fix", "style", "refactor"];
 let temperature = 0.4;
 let count = process.argv[2] || 20;
 
+let childProcess = require('child_process');
+
 console.log(`Generating ${count} commit messages with temperature ${temperature} from types: ${types}`);
 
 function generateWord() {
@@ -25,6 +27,7 @@ for (let i = 1; i <= parseInt(count); i++) {
     for (let j = 1; j <= 6; j++) {
         message += generateWord() + " ";
     }
-    console.log(message);
+    childProcess.exec("git add .");
+    childProcess.exec(`git commit -am "${message}"`);
 }
 
