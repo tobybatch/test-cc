@@ -30,6 +30,7 @@ setTimeout(() => {
         }
         childProcess.exec("git add .");
         childProcess.exec(`git commit -am "${message}"`);
+        console.log(`Generated commit messages ${i}: ${message}`);
     }
 }, 1000);
 
