@@ -22,34 +22,4 @@ jobs:
         run: npm ci
 
       - name: Validate PR commits with Commitlint
-        run: |
-          node <<'EOF'
-          const { execSync } = require('child_process');
-
-          const baseRef = process.env.GITHUB_BASE_REF;
-          const headSha = process.env.GITHUB_SHA;
-
-          if (!baseRef || !headSha) {
-            throw new Error('Missing pull request context.');
-          }
-
-          const baseSha = execSync(`git rev-parse origin/${baseRef}`).toString().trim();
-          const commits = execSync(`git rev-list ${baseSha}..${headSha}`, { encoding: 'utf8' })
-            .trim()
-            .split('\n')
-            .filter(Boolean);
-
-          if (commits.length === 0) {
-            throw new Error('No commits found in this pull request.');
-          }
-
-          const conventionalCommit = /^([a-z]+)(\([^)]+\))?!?: .+/;
-          const hasValidCommit = commits.some((sha) => {
-            const message = execSync(`git log --format=%s -n 1 ${sha}`, { encoding: 'utf8' }).trim();
-            return conventionalCommit.test(message);
-          });
-
-          if (!hasValidCommit) {
-            throw new Error('At least one commit in this pull request must use conventional commits format.');
-          }
-          EOF
+        run: node bin/lint-pr-commits.js
